@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="flex flex-col bg-[#56ab91] items-center">
+    <div
+      id="app"
+      class="w-[70vw] bg-[#fff] h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
+    >
+      <nav
+        class="relative px-4 py-4 flex justify-between items-center bg-white"
+      >
+        <a class="text-3xl font-bold leading-none" href="#">
+          <img
+            class="mx-auto h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&amp;shade=600"
+            alt="Your Company"
+          />
+        </a>
+        <div class="lg:hidden">
+          <button class="navbar-burger flex items-center text-blue-600 p-3">
+            <svg
+              class="block h-4 w-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Mobile menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="mx-3 hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          >
+            Logout
+          </button>
+          <button
+            type="submit"
+            class="mx-3 hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          >
+            Logout
+          </button>
+        </div>
+      </nav>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

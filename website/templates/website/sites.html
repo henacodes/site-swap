@@ -1,0 +1,24 @@
+{% extends "website/layout.html" %}
+
+
+{% block title %}
+Site List
+{% endblock  %}
+
+
+
+{% block content %}
+
+
+<div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> 
+        {% for site in sites  %}
+            <div class="bg-white rounded-lg shadow-md p-4 m-2 ">
+                <h2 class="text-xl font-semibold text-gray-800">{{ site.name }}</h2>
+                <a href="{{ site.link }}" class="block text-blue-500 hover:underline mb-2">{{ siteLink }}</a>
+                <p class="text-gray-600">{{ site.description }}</p>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock  %}
