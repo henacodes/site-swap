@@ -36,20 +36,3 @@ class CreateUserForm(UserCreationForm):
 
 
 
-
-
-class UserAuthenticateForm(AuthenticationForm):
-    class Meta:
-        model = User  # Replace "User" with the name of your custom user model
-        ##fields = ['username', 'password']  # Fields to include in the form
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # Customize form fields if needed
-        #self.fields['email'].widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Email'})
-        #self.fields['password'].widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Password'})
-
-        ##for  field in self.fields:
-        ##    field.widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Email'})
-        
