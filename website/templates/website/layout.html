@@ -20,14 +20,13 @@
       class="w-[70vw] bg-[#fff] h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
     >
       <nav
-        class="relative px-4 py-4 flex justify-between items-center bg-white"
+        class="relative px-4 py-4 flex justify-between items-center bg-[#30332e]"
       >
-        <a class="text-3xl font-bold leading-none" href="#">
-          <img
-            class="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&amp;shade=600"
-            alt="Your Company"
-          />
+        <a
+          class="text-3xl font-bold leading-none font-bold text-white"
+          href="#"
+        >
+          SiteSwap <span class="text-accent font-extrabold text-4xl">.</span>
         </a>
         <div class="lg:hidden">
           <button class="navbar-burger flex items-center text-blue-600 p-3">
@@ -43,6 +42,36 @@
         </div>
 
         <div>
+          {% if user.is_authenticated %}
+          <div class="profile-wrapper">
+            <img
+              src="/media_cdn/{{user.profile_image}}"
+              class="profile-image rounded-full w-[2rem]"
+              alt=""
+            />
+
+            <div
+              class="fixed w-[100vw] h-[100vh] top-0 left-0 bg-none z-10 hidden"
+              id="popup-menu-backdrop"
+            ></div>
+            <div
+              class="absolute z-20 top-13 hidden right-[3.5rem] bg-slate-100 rounded p-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 px-2 py-2"
+              id="popup-menu"
+            >
+              <!-- Content of the popup menu goes here -->
+              <a
+                href="#"
+                class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Edit Profile</a
+              >
+              <a
+                href="#"
+                class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Logout</a
+              >
+            </div>
+          </div>
+          {% else %}
           <button
             type="submit"
             class="mx-3 hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
@@ -55,9 +84,34 @@
           >
             Logout
           </button>
+          {% endif %}
         </div>
       </nav>
       {% block content %}{% endblock %}
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileImage = document.querySelector(".profile-image");
+        const popupMenu = document.querySelector("#popup-menu");
+        const popupMenuBackdrop = document.querySelector(
+          "#popup-menu-backdrop"
+        );
+
+        const removePopup = () => {
+          console.log(popupMenuBackdrop);
+          if (popupMenu.style.display === "none") {
+            popupMenu.style.display = "block";
+            popupMenuBackdrop.style.display = "block";
+          } else {
+            popupMenu.style.display = "none";
+            popupMenuBackdrop.style.display = "none";
+          }
+        };
+
+        profileImage.addEventListener("click", removePopup);
+        popupMenuBackdrop.addEventListener("click", removePopup);
+      });
+    </script>
   </body>
 </html>

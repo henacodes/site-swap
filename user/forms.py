@@ -53,17 +53,3 @@ class UserAuthenticateForm(AuthenticationForm):
         ##for  field in self.fields:
         ##    field.widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Email'})
         
-
-
-'''
-
-class UserAuthenticateForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True}))
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].label = 'Email'
-        self.fields['password'].widget.attrs.update({'placeholder': 'Password'})
-
-
-'''
