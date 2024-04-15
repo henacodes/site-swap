@@ -32,14 +32,14 @@
   <body class="flex flex-col bg-[#56ab91] items-center">
     <div
       id="app"
-      class="w-[70vw] bg-[#fff] h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
+      class="w-[70vw] left-1/2 transform rounded-t-lg   -translate-x-1/2 fixed top-4 left-0 bg-[#edede9]   h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
     >
       <nav
-        class="relative px-4 py-4 flex justify-between items-center bg-[#30332e]"
+        class="relative px-4 py-4 flex justify-between items-center bg-[#fff] rounded-t-lg"
       >
         <a
-          class="text-3xl font-bold leading-none font-bold text-white"
-          href="#"
+          class="text-3xl font-bold leading-none font-bold text-[#30332e]"
+          href="{% url "site_list" %}"
         >
           SiteSwap <span class="text-accent font-extrabold text-4xl">.</span>
         </a>
@@ -79,25 +79,34 @@
                 class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Edit Profile</a
               >
-              <form action="{% url "logout_user" %}" method="post" class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <a
+              href="#"
+              class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >Add site</a
+            >
+              <form action="{% url "logout_user" %}" method="POST" class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 {% csrf_token %}
                <button type="submit" class="bg-none">logout</button>
               </form>
             </div>
           </div>
           {% else %}
+         <a href="{% url "create_user" %}">
           <button
-            type="submit"
-            class="mx-3 hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-          >
-            Logout
-          </button>
+          type="submit"
+          class="mx-3 hidden lg:inline-block py-2 px-3 bg-accent text-sm text-white font-bold rounded-md transition duration-200 shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] shadow-[#56ab91] "
+        >
+          Register
+        </button>
+         </a>
+         <a href="{% url "login_user" %}">
           <button
-            type="submit"
-            class="mx-3 hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-          >
-            Logout
-          </button>
+          type="submit"
+          class="mx-3 hidden lg:inline-block py-2 px-3 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-md transition duration-200"
+        >
+          Login
+        </button>
+         </a>
           {% endif %}
         </div>
       </nav>

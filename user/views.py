@@ -22,7 +22,6 @@ def create_user_view(request):
 
 def login_user_view(request):
     if request.method == "POST":
-        print('loggin in')
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('username')  # Assuming the email field is used as the username
@@ -59,11 +58,12 @@ def update_user_view(request):
     else:
         form = UserUpdateForm(instance=request.user)
 
-    print(form)
     return render(request, 'user/edit_profile.html', {'form': form})
 
 @login_required
 def logout_user_view(request):
+    print("log the fuck out")
     if (request.method == "POST"):
+        print('hittin logout')
         logout(request)
-        redirect("user_login")
+        return redirect("site_list")
