@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, CustomAuthenticationForm, UserUpdateForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
@@ -61,3 +61,9 @@ def update_user_view(request):
 
     print(form)
     return render(request, 'user/edit_profile.html', {'form': form})
+
+@login_required
+def logout_user_view(request):
+    if (request.method == "POST"):
+        logout(request)
+        redirect("user_login")
