@@ -1,26 +1,28 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
+
+INPUT_CLASS = "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700"
 
 class CreateUserForm(UserCreationForm):
     password2 = forms.CharField(
         label='Confirm Password',
-        widget=forms.PasswordInput(attrs={'class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'})
+        widget=forms.PasswordInput(attrs={'class': INPUT_CLASS})
     )
 
     class Meta:
         model = User
         fields = ['name', 'username', 'email', 'password1', 'password2']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder':'name', 'class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'}),
-            'username': forms.TextInput(attrs={'placeholder':'username','class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'}),
-            'email': forms.EmailInput(attrs={'placeholder':'email','class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'}),
+            'name': forms.TextInput(attrs={'placeholder':'name', 'class': INPUT_CLASS}),
+            'username': forms.TextInput(attrs={'placeholder':'username','class': INPUT_CLASS}),
+            'email': forms.EmailInput(attrs={'placeholder':'email','class': INPUT_CLASS}),
             }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password1'].widget.attrs.update({'placeholder':'password', 'class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'})
-        self.fields['password2'].widget.attrs.update({'placeholder':'confirm password', 'class': 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700'})
+        self.fields['password1'].widget.attrs.update({'placeholder':'password', 'class': INPUT_CLASS})
+        self.fields['password2'].widget.attrs.update({'placeholder':'confirm password', 'class': INPUT_CLASS})
 
     def clean_password2(self):
         password = self.cleaned_data.get('password1')
@@ -30,3 +32,34 @@ class CreateUserForm(UserCreationForm):
             raise forms.ValidationError("Passwords do not match.")
 
         return password2
+    
+
+
+
+
+
+class UserAuthenticateForm(AuthenticationForm):
+    class Meta:
+        model = User  # Replace "User" with the name of your custom user model
+        fields = ['email', 'password']  # Fields to include in the form
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Customize form fields if needed
+        self.fields['username'].widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Email'})
+        self.fields['password'].widget.attrs.update({'class':INPUT_CLASS,'placeholder': 'Password'})
+
+
+'''
+
+class UserAuthenticateForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = 'Email'
+        self.fields['password'].widget.attrs.update({'placeholder': 'Password'})
+
+
+'''
