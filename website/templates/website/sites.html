@@ -10,15 +10,21 @@ Site List
 {% block content %}
 
 
-<div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> 
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-5  "> 
         {% for site in sites  %}
-            <div class="bg-white rounded-lg shadow-md p-4 m-2 ">
-                <h2 class="text-xl font-semibold text-gray-800">{{ site.name }}</h2>
-                <a href="{{ site.link }}" class="block text-blue-500 hover:underline mb-2">{{ siteLink }}</a>
-                <p class="text-gray-600">{{ site.description }}</p>
+            <div class="bg-white rounded-lg shadow-md  m-2 ">
+                <img src="/media_cdn/{{ site.screenshot }}" alt="" class="rounded-lg">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold text-gray-800">{{ site.name }}</h2>
+                    <a href="{{ site.link }}" class="block text-blue-500 hover:underline mb-2">{{ siteLink }}</a>
+                    <p class="text-gray-600">
+                        {{ site.description|slice:":80" }}
+                        {% if site.description|length > 80 %}...{% endif %}
+                    </p>
+                </div>
           </div>
         {% endfor %}
     </div>
-</div>
+
 {% endblock  %}

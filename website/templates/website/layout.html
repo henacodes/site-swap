@@ -32,10 +32,10 @@
   <body class="flex flex-col bg-[#56ab91] items-center">
     <div
       id="app"
-      class="w-[70vw] left-1/2 transform rounded-t-lg   -translate-x-1/2 fixed top-4 left-0 bg-[#edede9]   h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
+      class="w-[70vw] left-1/2 transform rounded-t-lg   -translate-x-1/2 fixed top-4 left-0    h-[100vh] shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]"
     >
       <nav
-        class="relative px-4 py-4 flex justify-between items-center bg-[#fff] rounded-t-lg"
+        class="relative px-4 py-4 flex justify-between items-center bg-[#fff] rounded-lg"
       >
         <a
           class="text-3xl font-bold leading-none font-bold text-[#30332e]"
@@ -80,7 +80,7 @@
                 >Edit Profile</a
               >
               <a
-              href="#"
+              href="{% url 'create_site' %}"
               class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >Add site</a
             >
@@ -110,7 +110,9 @@
           {% endif %}
         </div>
       </nav>
-      {% block content %}{% endblock %}
+      
+      <div class="bg-[#edede9] h-full mt-5  rounded-t-lg " > {% block content %}{% endblock %}</div>
+      
     </div>
 
     <script>

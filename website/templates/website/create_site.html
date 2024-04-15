@@ -1,0 +1,19 @@
+{% extends "website/layout.html" %}
+
+
+{% block title %}
+Add Site
+{% endblock  %}
+
+
+
+{% block content %}
+
+<div>
+    <form action="{% url "create_site" %}" method="post"enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="bg-accent p-2 " >Add</button>
+    </form>
+</div>
+{% endblock  %}
