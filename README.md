@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ### Run Migrations
 
-Run the database migrations to create the necessary tables:
+Create a file db.sqlite3 and run the database migrations to create the necessary tables:
 
 ```bash
 $ python manage.py makemigrations
