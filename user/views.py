@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CustomAuthenticationForm, UserUpdateForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
 
 
@@ -19,30 +18,12 @@ def create_user_view(request):
 
 
 
-'''
-def login_user_view(request):
-    if (request.method == "POST"):
-        form = AuthenticationForm(request.POST)
-        if (form.is_valid()):
-            print('successfully logged in ')
-
-        else:
-            print("formmmmmmmmmmmmmmm")
-            print(request.POST)
-            print("Get the fuck outa here ")
-    else:
-        form = AuthenticationForm()
-        return render(request, "user/login_user.html", {"form":form})
-    
-
-
-'''
 
 
 def login_user_view(request):
     if request.method == "POST":
         print('loggin in')
-        form = AuthenticationForm(request, data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('username')  # Assuming the email field is used as the username
             password = form.cleaned_data.get('password')
@@ -62,5 +43,21 @@ def login_user_view(request):
             return render(request, "user/create_user.html", {"form": form})
             return redirect("create_user")
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     return render(request, "user/login_user.html", {"form": form})
+
+
+
+
+@login_required
+def update_user_view(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('site_list')  # Replace 'profile' with the URL name of the user profile view
+    else:
+        form = UserUpdateForm(instance=request.user)
+
+    print(form)
+    return render(request, 'user/edit_profile.html', {'form': form})

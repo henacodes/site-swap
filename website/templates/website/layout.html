@@ -13,6 +13,21 @@
     .text-accent {
       color: #56ab91;
     }
+
+    input {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1c64f2;
+    }
   </style>
   <body class="flex flex-col bg-[#56ab91] items-center">
     <div
@@ -46,7 +61,7 @@
           <div class="profile-wrapper">
             <img
               src="/media_cdn/{{user.profile_image}}"
-              class="profile-image rounded-full w-[2rem]"
+              class="cursor-pointer profile-image rounded-full w-[2rem]"
               alt=""
             />
 
@@ -60,7 +75,7 @@
             >
               <!-- Content of the popup menu goes here -->
               <a
-                href="#"
+                href="{% url "update_user" %}"
                 class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Edit Profile</a
               >

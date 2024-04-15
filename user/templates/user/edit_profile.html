@@ -1,0 +1,29 @@
+{% extends "website/layout.html" %}
+
+
+{% block title %}
+{{user.name }} - Edit profile
+{% endblock  %}
+
+
+
+{% block content %}
+
+<form method="POST" action="" class="md:mx-[10rem] m-3 " enctype="multipart/form-data"  >
+    {% csrf_token %}
+    <div class="w-full flex justify-center " > <p class=" text-3xl font-bold text-accent   ">Edit Profile</p></div>
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
+
+      <div class="md:col-span-2 my-2 ">{{form.name}} </div>
+      <div class="md:col-span-2 my-2 ">{{form.email}} </div>
+      <div class="md:col-span-2 my-2 ">{{form.username}} </div>
+      <div class="md:col-span-2 my-2 ">{{form.profile_image}} </div>     
+
+        <div class=" w-full md:col-span-2 flex justify-center   " >
+            <button class="p-2 m-2  bg-accent w-[20%]  rounded "> Update </button>
+        </div>
+    </div>
+    
+
+</form>
+{% endblock  %}

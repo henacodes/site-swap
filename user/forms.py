@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import User
+
 
 INPUT_CLASS = "w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700"
 
@@ -35,4 +36,21 @@ class CreateUserForm(UserCreationForm):
     
 
 
+
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget = forms.TextInput(attrs={'placeholder': 'Email', "class":INPUT_CLASS})
+        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': 'Password', "class":INPUT_CLASS})
+
+
+
+
+
+class UserUpdateForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email', 'name', 'username', 'profile_image', 'hide_email')
 
