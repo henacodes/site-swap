@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Website
 from .forms import WebsiteForm
+from .models import Website
+from django.core.exceptions import ObjectDoesNotExist
 
-# Create your views here.
+
 
 
 
@@ -29,3 +31,12 @@ def create_site(request):
     else:
         form = WebsiteForm()
         return render(request, 'website/create_site.html', {'form': form})
+    
+
+
+def site_details(request, site_id):
+    try:
+        site = Website.objects.get(id=site_id)
+        return render(request, "website/site_details.html", { "site":site })
+    except Website.DoesNotExist:
+        return render(request, "website/404.html")

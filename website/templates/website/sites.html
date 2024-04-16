@@ -22,10 +22,11 @@ Site List
                         {{ site.description|slice:":80" }}
                         {% if site.description|length > 80 %}...{% endif %}
                     </p>
-                    <div class="flex items-center  mt-4  justify-right  ">
+                    <!--<div class="flex items-center  mt-4  justify-right  ">
                         <img src="/media_cdn/{{site.posted_by.profile_image }}" class="w-[1.7rem] rounded-full mx-2  " alt="">
                         <p class=" text-lg ">{{ site.posted_by }}</p>
-                    </div>
+                    </div> -->
+                    <a href="{% url 'site_details' site.id %}">Details</a>
                 </div>
           </div>
         {% endfor %}
