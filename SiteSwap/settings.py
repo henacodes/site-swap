@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+from decouple import config
+
 import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u0%81tgswi1jgz)ulx6c7t%ked69v*v)=y*@q33qa&n@$d#-o-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,11 +81,20 @@ WSGI_APPLICATION = 'SiteSwap.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ljwwgdts',
+        'USER': 'ljwwgdts',
+        'PASSWORD': 'bhy_Jj7zkXVO0EzZERlosHEmACr0j_er',
+        'HOST': 'postgres://henacodes:YVWxBmWzAlomNIrz0PG27YnlKqSjDibR@dpg-cocuu520si5c738mtpp0-a.oregon-postgres.render.com/djangodb_xtvf',
+        'PORT': '5432',
     }
 }
 
+
+DATABASE_URL = config('DATABASE_URL')
+
+print(DATABASE_URL)
+DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

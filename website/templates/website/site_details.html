@@ -16,26 +16,22 @@
 
 
  
-           {% if site %}
-           <div class="bg-white rounded-lg shadow-md  m-2 ">
-            <img src="/media_cdn/{{ site.screenshot }}" alt="" class="rounded-lg">
-            <div class="p-4">
-                <h2 class="text-xl font-semibold text-gray-800">{{ site.name }}</h2>
-                <a href="{{ site.link }}" class="block text-blue-500 hover:underline mb-2">{{ siteLink }}</a>
-                <p class="text-gray-600">
-                    {{ site.description|slice:":80" }}
-                    {% if site.description|length > 80 %}...{% endif %}
-                </p>
-                <!--<div class="flex items-center  mt-4  justify-right  ">
-                    <img src="/media_cdn/{{site.posted_by.profile_image }}" class="w-[1.7rem] rounded-full mx-2  " alt="">
-                    <p class=" text-lg ">{{ site.posted_by }}</p>
-                </div> -->
-                <a href="{% url 'site_details' site.id %}">Details</a>
+           
+           <div class=" rounded-lg  scroll-auto  ">
+                <img src="/media_cdn/{{ site.screenshot }}" alt="" class="rounded-lg w-full object-cover  h-[20rem] ">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold text-gray-800">{{ site.name }}</h2>
+                    <a href="{{ site.link }}" class="block text-blue-500 hover:underline mb-2">{{ siteLink }}</a>
+                    <p class="text-gray-600">
+                        {{site.description}}
+                    </p>
+                    <div class=" max-w-[9rem] flex justify-center p-1 m-2   flex items-center    justify-right  hover:bg-gray-100 cursor-pointer   rounded-md ">
+                        <img src="/media_cdn/{{site.posted_by.profile_image }}" class="w-[1.7rem] rounded-full  mx-2   " alt="">
+                        <p class=" text-lg  ">{{ site.posted_by }}</p>
+                    </div> 
+                </div>
             </div>
-            </div>
-            {% else %}
-            <p>404 Not found</p>
-           {% endif %}
+
        
 
 {% endblock  %}

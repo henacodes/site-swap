@@ -11,7 +11,7 @@ def create_user_view(request):
         form = CreateUserForm(request.POST)
         if (form.is_valid):
             form.save()
-            redirect("login_user")
+            return redirect("login_user")
     else:
         form = CreateUserForm()
         return render(request, "user/create_user.html", { "form":form })
